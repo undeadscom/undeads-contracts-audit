@@ -1,0 +1,806 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xfAB383D576f48D9AB41a2fD6EfcBbC47d4f8872a",
+    "txHash": "0x8a58aeda68068326bb9df42c7efc3496c147948d70518a00df738648a448b0f5"
+  },
+  "proxies": [
+    {
+      "address": "0xC657ceD190C0077a1d18524f5451DF696c7606E1",
+      "txHash": "0xd90d0ddb52eec46708c9b78674221eec959da4e4ff0866dc85b7625000bbb842",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x7B0EE559eda70d182fEe449EE3936898F20D2547",
+      "txHash": "0x2bdffcb7b24d144297bf3c0dbbe5baecfdc6d0c1592c7de5e092e733eae3070a",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xdf1d0cfac0B6D30aF81D7ec5DF61927A517A12B6",
+      "txHash": "0x31d08402934c5d45f632a266d6bdc1c6c264354f73dc62d735acfe1dadc33db2",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc1cd80849b138909C5599096c0caB36c229Ed3cF",
+      "txHash": "0x4008082252ed45e46665904a4b48ed3f618321b0ad5a691c5cfa6e0f22ccac27",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "4464b519ee10140ba0738792828795bd96bc5a03bb088af9d56463205ce7d2f2": {
+      "address": "0x12E4671f148d42679F320A691b5DaFa0ea7d7cc0",
+      "txHash": "0xa1b44dea82146d63c39e349251a5c57ac49974c679846f65c662d0f3aa57b3e8",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_uint8",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "_seeds",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:10"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "_last",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:11"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "A",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:12"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "B",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:13"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "C",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:14"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "D",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:15"
+          }
+        ],
+        "types": {
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "1914999ab4bad79b42fa3f2ab6c4e4d25fd2d9f7960fb1eff256e674663fc7b4": {
+      "address": "0xbc4874844b78B198F9FF78CE1db0ca4DD6BbA9a5",
+      "txHash": "0x4b4c437334d71800a2923478e26277c5cf2f55ad654af1f2ca4635cd551cbd65",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_uint8",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "contract": "GuardExtensionUpgradeable",
+            "label": "_rightsContract",
+            "type": "t_contract(IRights)8965",
+            "src": "../project:/contracts/upgradeable/utils/GuardExtensionUpgradeable.sol:12"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_ids",
+            "type": "t_struct(Counter)6366_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:21"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_deletedIds",
+            "type": "t_struct(Counter)6366_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:22"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_used",
+            "type": "t_struct(BitMap)6774_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:23"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_benefits",
+            "type": "t_mapping(t_address,t_array(t_struct(Benefit)9320_storage)dyn_storage)",
+            "src": "../project:/contracts/persons/Benefits.sol:24"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_receiverIds",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/persons/Benefits.sol:25"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_receivers",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "../project:/contracts/persons/Benefits.sol:26"
+          }
+        ],
+        "types": {
+          "t_struct(Counter)6366_storage": {
+            "label": "struct Counters.Counter",
+            "members": [
+              {
+                "label": "_value",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_struct(BitMap)6774_storage": {
+            "label": "struct BitMaps.BitMap",
+            "members": [
+              {
+                "label": "_data",
+                "type": "t_mapping(t_uint256,t_uint256)"
+              }
+            ]
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)"
+          },
+          "t_mapping(t_address,t_array(t_struct(Benefit)9320_storage)dyn_storage)": {
+            "label": "mapping(address => struct Structures.Benefit[])"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_struct(Benefit)9320_storage)dyn_storage": {
+            "label": "struct Structures.Benefit[]"
+          },
+          "t_struct(Benefit)9320_storage": {
+            "label": "struct Structures.Benefit",
+            "members": [
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "from",
+                "type": "t_uint256"
+              },
+              {
+                "label": "until",
+                "type": "t_uint256"
+              },
+              {
+                "label": "id",
+                "type": "t_uint16"
+              },
+              {
+                "label": "amount",
+                "type": "t_uint8"
+              },
+              {
+                "label": "level",
+                "type": "t_uint8"
+              },
+              {
+                "label": "issued",
+                "type": "t_uint8"
+              }
+            ]
+          },
+          "t_uint16": {
+            "label": "uint16"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)"
+          },
+          "t_contract(IRights)8965": {
+            "label": "contract IRights"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "e4014524dfd81357617997cf336b50f1530cf0292414d2f078f4c570c7ca4c7d": {
+      "address": "0xE27A5c00EBfa0AC040CE414e7F3A7bE5c4A73F34",
+      "txHash": "0xba804d13d00d831cb235b17e969ba37b7db178cbc37cdaa1ba3caea040461a93",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_uint8",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "contract": "GuardExtensionUpgradeable",
+            "label": "_rightsContract",
+            "type": "t_contract(IRights)8965",
+            "src": "../project:/contracts/upgradeable/utils/GuardExtensionUpgradeable.sol:12"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_ids",
+            "type": "t_struct(Counter)6366_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:21"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_deletedIds",
+            "type": "t_struct(Counter)6366_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:22"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_used",
+            "type": "t_struct(BitMap)6774_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:23"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_benefits",
+            "type": "t_mapping(t_address,t_array(t_struct(Benefit)9320_storage)dyn_storage)",
+            "src": "../project:/contracts/persons/Benefits.sol:24"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_receiverIds",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/persons/Benefits.sol:25"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_receivers",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "../project:/contracts/persons/Benefits.sol:26"
+          }
+        ],
+        "types": {
+          "t_struct(Counter)6366_storage": {
+            "label": "struct Counters.Counter",
+            "members": [
+              {
+                "label": "_value",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_struct(BitMap)6774_storage": {
+            "label": "struct BitMaps.BitMap",
+            "members": [
+              {
+                "label": "_data",
+                "type": "t_mapping(t_uint256,t_uint256)"
+              }
+            ]
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)"
+          },
+          "t_mapping(t_address,t_array(t_struct(Benefit)9320_storage)dyn_storage)": {
+            "label": "mapping(address => struct Structures.Benefit[])"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_struct(Benefit)9320_storage)dyn_storage": {
+            "label": "struct Structures.Benefit[]"
+          },
+          "t_struct(Benefit)9320_storage": {
+            "label": "struct Structures.Benefit",
+            "members": [
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "from",
+                "type": "t_uint256"
+              },
+              {
+                "label": "until",
+                "type": "t_uint256"
+              },
+              {
+                "label": "id",
+                "type": "t_uint16"
+              },
+              {
+                "label": "amount",
+                "type": "t_uint16"
+              },
+              {
+                "label": "level",
+                "type": "t_uint8"
+              },
+              {
+                "label": "issued",
+                "type": "t_uint8"
+              }
+            ]
+          },
+          "t_uint16": {
+            "label": "uint16"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)"
+          },
+          "t_contract(IRights)8965": {
+            "label": "contract IRights"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "85ef97a0afb73ba1836b611d907403d308563bdcee8945d66db21126654e5975": {
+      "address": "0x613d7d41a92252D85B98f6890A9F3f27013516fb",
+      "txHash": "0xb28f6042a95284e08d92a87d81f62509bb3a21f0d9f5ab1507db9fc684374dd0",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_uint8",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "contract": "GuardExtensionUpgradeable",
+            "label": "_rightsContract",
+            "type": "t_contract(IRights)8965",
+            "src": "../project:/contracts/upgradeable/utils/GuardExtensionUpgradeable.sol:12"
+          },
+          {
+            "contract": "AggregationFunds",
+            "label": "claimableContracts",
+            "type": "t_mapping(t_address,t_array(t_contract(IClaimableFunds)21478)dyn_storage)",
+            "src": "../project:/contracts/manage/AggregationFunds.sol:45"
+          },
+          {
+            "contract": "AggregationFunds",
+            "label": "_uds",
+            "type": "t_contract(IERC20)4525",
+            "src": "../project:/contracts/manage/AggregationFunds.sol:47"
+          },
+          {
+            "contract": "AggregationFunds",
+            "label": "_ugold",
+            "type": "t_contract(IERC20)4525",
+            "src": "../project:/contracts/manage/AggregationFunds.sol:48"
+          },
+          {
+            "contract": "AggregationFunds",
+            "label": "_limits",
+            "type": "t_mapping(t_address,t_struct(Limits)9355_storage)",
+            "src": "../project:/contracts/manage/AggregationFunds.sol:49"
+          },
+          {
+            "contract": "AggregationFunds",
+            "label": "coldWallet",
+            "type": "t_address_payable",
+            "src": "../project:/contracts/manage/AggregationFunds.sol:50"
+          },
+          {
+            "contract": "AggregationFunds",
+            "label": "hotWallet",
+            "type": "t_address_payable",
+            "src": "../project:/contracts/manage/AggregationFunds.sol:51"
+          }
+        ],
+        "types": {
+          "t_mapping(t_address,t_array(t_contract(IClaimableFunds)21478)dyn_storage)": {
+            "label": "mapping(address => contract IClaimableFunds[])"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_contract(IClaimableFunds)21478)dyn_storage": {
+            "label": "contract IClaimableFunds[]"
+          },
+          "t_contract(IClaimableFunds)21478": {
+            "label": "contract IClaimableFunds"
+          },
+          "t_contract(IERC20)4525": {
+            "label": "contract IERC20"
+          },
+          "t_mapping(t_address,t_struct(Limits)9355_storage)": {
+            "label": "mapping(address => struct AggregationFunds.Limits)"
+          },
+          "t_struct(Limits)9355_storage": {
+            "label": "struct AggregationFunds.Limits",
+            "members": [
+              {
+                "label": "min",
+                "type": "t_uint256"
+              },
+              {
+                "label": "max",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_address_payable": {
+            "label": "address payable"
+          },
+          "t_contract(IRights)8965": {
+            "label": "contract IRights"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "c3531ba984a0cd944fb40114b3f4c916a861b4b5333c0e725d99ab76925b8574": {
+      "address": "0xE90269cf647519AbB36D460A63556002418cD66B",
+      "txHash": "0x0f1a0c204d62577782d0b6b76d5870d3eaaebada6039f008481e5999eebecc0e",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_uint8",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "contract": "GuardExtensionUpgradeable",
+            "label": "_rightsContract",
+            "type": "t_contract(IRights)8965",
+            "src": "../project:/contracts/upgradeable/utils/GuardExtensionUpgradeable.sol:12"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_ids",
+            "type": "t_struct(Counter)6366_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:21"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_deletedIds",
+            "type": "t_struct(Counter)6366_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:22"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_used",
+            "type": "t_struct(BitMap)6774_storage",
+            "src": "../project:/contracts/persons/Benefits.sol:23"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_benefits",
+            "type": "t_mapping(t_address,t_array(t_struct(Benefit)9320_storage)dyn_storage)",
+            "src": "../project:/contracts/persons/Benefits.sol:24"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_receiverIds",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/persons/Benefits.sol:25"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_receivers",
+            "type": "t_mapping(t_uint256,t_address)",
+            "src": "../project:/contracts/persons/Benefits.sol:26"
+          },
+          {
+            "contract": "Benefits",
+            "label": "_additionalIssued",
+            "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))",
+            "src": "../project:/contracts/persons/Benefits.sol:33"
+          }
+        ],
+        "types": {
+          "t_struct(Counter)6366_storage": {
+            "label": "struct Counters.Counter",
+            "members": [
+              {
+                "label": "_value",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_struct(BitMap)6774_storage": {
+            "label": "struct BitMaps.BitMap",
+            "members": [
+              {
+                "label": "_data",
+                "type": "t_mapping(t_uint256,t_uint256)"
+              }
+            ]
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)"
+          },
+          "t_mapping(t_address,t_array(t_struct(Benefit)9320_storage)dyn_storage)": {
+            "label": "mapping(address => struct Structures.Benefit[])"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_struct(Benefit)9320_storage)dyn_storage": {
+            "label": "struct Structures.Benefit[]"
+          },
+          "t_struct(Benefit)9320_storage": {
+            "label": "struct Structures.Benefit",
+            "members": [
+              {
+                "label": "price",
+                "type": "t_uint256"
+              },
+              {
+                "label": "from",
+                "type": "t_uint256"
+              },
+              {
+                "label": "until",
+                "type": "t_uint256"
+              },
+              {
+                "label": "id",
+                "type": "t_uint16"
+              },
+              {
+                "label": "amount",
+                "type": "t_uint16"
+              },
+              {
+                "label": "level",
+                "type": "t_uint8"
+              },
+              {
+                "label": "issued",
+                "type": "t_uint8"
+              }
+            ]
+          },
+          "t_uint16": {
+            "label": "uint16"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_uint256,t_address)": {
+            "label": "mapping(uint256 => address)"
+          },
+          "t_mapping(t_address,t_mapping(t_uint256,t_uint256))": {
+            "label": "mapping(address => mapping(uint256 => uint256))"
+          },
+          "t_contract(IRights)8965": {
+            "label": "contract IRights"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    },
+    "912326c65500f7a470a4033f24f0a8e8fd8da74e208e3541a5bfc37391b49b15": {
+      "address": "0xceFe3961D3432A3F371F566026f057CC51DC0512",
+      "txHash": "0x7c30f049151a99ee4342d273803c32c3b9e3f66e7e30e7255ad7a2149662ac29",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_uint8",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:94"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "_seeds",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:10"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "_last",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:11"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "A",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:12"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "B",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:13"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "C",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:14"
+          },
+          {
+            "contract": "LehmerRandomizer",
+            "label": "D",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "../project:/contracts/utils/LehmerRandomizer.sol:15"
+          }
+        ],
+        "types": {
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    }
+  }
+}

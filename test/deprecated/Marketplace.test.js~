@@ -1,0 +1,205 @@
+const chai = require("chai");
+const { BN, expectRevert } = require('@openzeppelin/test-helpers');
+const { parseEvents } = require('../events.js');
+const { expect } = chai;
+chai.use(require('chai-bn')(BN));
+
+
+const MarketplaceStorage = artifacts.require("MarketplaceStorage");
+const MarketplaceTreasury = artifacts.require("MarketplaceTreasury");
+const Marketplace = artifacts.require("Marketplace");
+const Rights = artifacts.require("Rights");
+const Router = artifacts.require("Router");
+const UDSToken = artifacts.require("UDSToken");
+const UGoldToken = artifacts.require("UGoldToken");
+const Zombies = artifacts.require("Zombies");
+
+contract("Marketplace", (accounts) => {
+  const [bob, alice, richard, alan, henry] = accounts;
+  
+  const mintItemFn = async (owner) => {
+    let minted = await this.zombies.mint(
+      0,      // id, if 0 - generate it by contract
+      owner,  // owner
+      [1253,1150,1212,1210,1216,1246,1217,1251,1158,1236], // props
+      true,   // sex, true if woman
+      true,   // born
+      0,      // adult time
+      1,      // childs
+      true    // immaculate
+    );
+    let events = parseEvents(minted);
+    return events.MintedImmaculate 
+              ? parseEvents(minted).MintedImmaculate.id.toString()
+              : parseEvents(minted).Minted.id.toString();
+  }
+
+  before(async () => {
+    this.router = await Router.new();
+    this.rights = await Rights.new();
+    this.router.setAddress("Rights", this.rights.address);
+
+    this.marketplaceStorage = await MarketplaceStorage.new(this.rights.address);
+    this.marketplaceTreasury = await MarketplaceTreasury.new(this.rights.address);
+    this.marketplace = await Marketplace.new(
+      this.marketplaceStorage.address, 
+      this.marketplaceTreasury.address,
+      this.rights.address,
+    );
+    this.zombies = await Zombies.new(this.rights.address, 6666);
+    this.uds = await UDSToken.new('10000000000000000000', this.rights.address);
+    this.ugold = await UGoldToken.new('10000000000000000000', this.rights.address);
+
+
+    // set rights
+    await this.rights.addAdmin(this.uds.address, bob);
+    await this.rights.addAdmin(this.ugold.address, bob);
+    await this.rights.addAdmin(this.marketplaceStorage.address, bob);
+    await this.rights.addAdmin(this.marketplaceTreasury.address, bob);
+    await this.rights.addAdmin(this.zombies.address, bob);
+    await this.rights.addAdmin(this.marketplaceStorage.address, this.marketplace.address);
+    await this.rights.addAdmin(this.marketplaceTreasury.address, this.marketplace.address);
+
+    const haveRights = await this.rights.haveRights(this.marketplaceTreasury.address, bob);
+    expect(haveRights).to.equal(true);
+    
+    await this.marketplaceStorage.approveCollections([this.zombies.address], true);
+    await this.marketplaceTreasury.approvePayment(this.uds.address, true);
+
+    // send some tokens
+    await this.uds.transferTo(bob, '1000');
+    await this.uds.transferTo(alice, '1000');
+  });
+
+  it("should init contracts in the right way", async () => {
+    const totalSupply = await this.uds.totalSupply()
+    expect(totalSupply).to.be.bignumber.equal('10000000000000000000');
+
+    const isApprovedUDS = await this.marketplaceTreasury.isPaymentAssetApproved(this.uds.address);
+    expect(isApprovedUDS).to.equal(true);
+    const isApprovedUGOLD = await this.marketplaceTreasury.isPaymentAssetApproved(this.ugold.address);
+    expect(isApprovedUGOLD).to.equal(false);
+
+    const isApprovedCollectionZ = await this.marketplaceStorage.approvedCollections(this.zombies.address);
+    expect(isApprovedCollectionZ).to.equal(true);
+    const isApprovedCollectionER20Token = await this.marketplaceStorage.approvedCollections(this.uds.address);
+    expect(isApprovedCollectionER20Token).to.equal(false);
+  });
+
+  it("should list ERC721 item on the marketplace by Bob", async () => {
+    const zombieId = await mintItemFn(bob);
+    await this.zombies.approve(this.marketplaceStorage.address, zombieId);
+    
+    await this.marketplace.listERC721Item(
+      this.zombies.address,
+      zombieId,
+      100,
+      this.uds.address
+    );
+
+    const listing = await this.marketplace.getListing(1);
+    expect(listing.listing.price).to.equal('100');
+    expect(listing.listing.paymentAsset).to.equal(this.uds.address);
+    expect(listing.tokenData.tokenId).to.equal(zombieId);
+    expect(listing.tokenData.amount).to.equal('1');
+    expect(listing.tokenData.owner).to.equal(bob);
+    expect(listing.tokenData.tokenAddress).to.equal(this.zombies.address);
+    expect(listing.tokenData.tokenStandard).to.equal('0');
+  });
+
+  it("should buy ERC721 item on the marketplace by Alice", async () => {
+    const listing = await this.marketplace.getListing(1);
+    const aliceUDSBalanceBefore = await this.uds.balanceOf(alice);
+
+    const shouldApproveBalance = new BN(100);
+    
+    await this.uds.approve(
+      this.marketplace.address, 
+      shouldApproveBalance,
+      { from: alice }
+    );
+    await this.marketplace.buyItem(1, { from: alice });
+
+    const aliceNftBalance = await this.zombies.balanceOf(alice);
+    expect(aliceNftBalance).to.be.bignumber.equal('1');
+    const aliceUDSBalance = await this.uds.balanceOf(alice);
+    expect(aliceUDSBalance).to.be.bignumber.equal(aliceUDSBalanceBefore.sub(shouldApproveBalance));
+    const balance = await this.marketplaceTreasury.availableToClaim(bob, this.uds.address);
+    expect(balance).to.be.bignumber.equal('100');
+  });
+
+  it("should have possibility to withdraw earned money by Bob", async () => {
+    const bobUDSBalanceBefore = await this.uds.balanceOf(bob);
+
+    const availableToWithdraw = await this.marketplaceTreasury.availableToClaim(bob, this.uds.address);
+    expect(availableToWithdraw).to.be.bignumber.equal('100');
+
+    await this.marketplaceTreasury.claimFunds(this.uds.address, bob, availableToWithdraw);
+    const bobUDSBalanceAfter = await this.uds.balanceOf(bob);
+    expect(bobUDSBalanceAfter.sub(bobUDSBalanceBefore)).to.be.bignumber.equal('100');
+
+    const availableToWithdrawAfter = await this.marketplaceTreasury.availableToClaim(bob, this.uds.address);
+    expect(availableToWithdrawAfter).to.be.bignumber.equal('0');
+  });
+
+  it("should revert if nothing to withdraw", async () => {
+    const availableToWithdraw = await this.marketplaceTreasury.availableToClaim(bob, this.uds.address);
+    expect(availableToWithdraw).to.be.bignumber.equal('0');
+
+    await expectRevert(this.marketplaceTreasury.claimFunds(this.uds.address, bob, availableToWithdraw), 'Zero balance');
+  });
+
+  it("should revert during addingFunds if doesn't have rights", async () => {
+    await expectRevert(
+      this.marketplaceTreasury.addFunds(this.uds.address, alice, '100', { from: alan }), 
+      'Guard: No rights'
+    );
+  });
+  
+  it("should revert during approving payment method if doesn't have rights", async () => {
+    await expectRevert(
+      this.marketplaceTreasury.approvePayment(this.ugold.address, true, { from: alan }), 
+      'Guard: No rights'
+    );
+  });
+
+  it("should revert during approving payment method if doesn't have rights", async () => {
+    await expectRevert(
+      this.marketplaceTreasury.approvePayment(this.ugold.address, true, { from: alan }), 
+      'Guard: No rights'
+    );
+  });
+
+  it("should revert during depositing tokens if doesn't have rights", async () => {
+    await expectRevert(
+      this.marketplaceStorage.depositTokens(
+        1, 
+        1,
+        this.zombies.address, 
+        alan,
+        1,
+        { from: alan }), 
+      'Guard: No rights'
+    );
+  });
+
+  it("should revert during transferTokens if doesn't have rights", async () => {
+    await expectRevert(
+      this.marketplaceStorage.transferTokens(
+        1,
+        alan, 
+        { from: alan }), 
+      'Guard: No rights'
+    );
+  });
+
+  it("should revert during approveCollections if doesn't have rights", async () => {
+    await expectRevert(
+      this.marketplaceStorage.approveCollections(
+        [this.zombies.address],
+        true, 
+        { from: alan }), 
+      'Guard: No rights'
+    );
+  });
+});

@@ -1,0 +1,32 @@
+// .doxityrc
+{
+  // gatsby project source files directory
+	"target": "scripts/doxity",
+  // folder that contains the contracts you want to compile
+	"src": "contracts/*",
+  // folder in gatsby project to dump contract data
+	"dir": "pages/docs",
+  // folder to output the generated html (relative to project root)
+	"out": "docs",
+  // tarball for bootstrapping the gatsby project
+  "source": "https://github.com/DigixGlobal/doxity-gatsby-starter-project/archive/9445d59056058159ce25d7cd1643039523718553.tar.gz",
+  // for truffle projects, you can get deployed contract info
+  // use https://github.com/DigixGlobal/doxity-gatsby-starter-project/archive/74df3b2b7a2484714540e4a9153a8f1d0f95a380.tar.gz for experimental interactive mode!
+  "interaction": {
+    "network": "2",
+    "providerUrl": "https://morden.infura.io/sign_up_to_get_a_hash"
+  },
+  // option to whitelist various data
+  "whitelist": {
+    // the keyname `all` will be used for whitelist defaults
+    "all": {
+      "abi": true,
+      "methods": true,
+      "bytecode": false, // bytecode is false or undefined, it won't be shown
+      "source": false // source is false or undefined, won't be shown
+    },
+    "DigixMath": {
+      "source": true // source code uniquely shown for this contract, bytecode still hidden
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+    "dependencies": {
+        "@chainlink/contracts": "0.5.1",
+        "@openzeppelin/contracts": "4.8.3",
+        "@openzeppelin/contracts-upgradeable": "4.8.3",
+        "operator-filter-registry": "1.3.1",
+        "solidity-big-number": "1.3.0"
+    },
+    "devDependencies": {
+        "@neptunemutual/solidoc": "^0.0.2-beta",
+        "@openzeppelin/test-helpers": "^0.5.16",
+        "@openzeppelin/truffle-upgrades": "1.19.0",
+        "@truffle/hdwallet-provider": "~1.7.0",
+        "bip39": "~3.0.4",
+        "canonical-weth": "^1.4.0",
+        "chai-bn": "^0.3.1",
+        "dotenv": "^16.0.3",
+        "eslint": "8.17.0",
+        "eslint-config-prettier": "8.5.0",
+        "eslint-config-standard": "17.0.0",
+        "eslint-import-resolver-typescript": "2.7.1",
+        "eslint-plugin-import": "2.26.0",
+        "eslint-plugin-mocha": "10.0.5",
+        "eslint-plugin-n": "15.2.1",
+        "eslint-plugin-prettier": "4.0.0",
+        "eslint-plugin-promise": "6.0.0",
+        "eth-gas-reporter": "^0.2.25",
+        "merkletreejs": "^0.3.9",
+        "prettier": "^2.8.8",
+        "prettier-plugin-solidity": "^1.1.3",
+        "solhint": "3.3.7",
+        "solhint-plugin-prettier": "0.0.5",
+        "solidity-docgen": "^0.6.0-beta.25",
+        "truffle": "^5.11.0",
+        "truffle-plugin-stdjsonin": "github:mhrsalehi/truffle-plugin-stdjsonin",
+        "truffle-plugin-verify": "^0.6.4",
+        "truffle-plugin-verify-proxy": "^0.0.3"
+    },
+    "optionalDependencies": {
+        "win-node-env": "^0.6.1"
+    },
+    "engines": {
+        "node": ">=16"
+    },
+    "license": "PROPRIERTARY",
+    "name": "@undeads/undeads-contracts",
+    "author": {
+        "name": "Ilya A. Shlyakhovoy, Dmitry Kharlanchuk"
+    },
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/undeadscom/undeads-contracts"
+    },
+    "scripts": {
+        "build": "truffle compile",
+        "migrate": "truffle migrate --network whimsy -f $FROM$ONLY --to $TO$ONLY --compile-none",
+        "migrate:main": "NODE_ENV=prod truffle migrate --network mainnet -f $FROM$ONLY --to $TO$ONLY --compile-none",
+        "migrate:whimsy": "NODE_ENV=whimsy truffle migrate --network whimsy -f $FROM$ONLY --to $TO$ONLY --compile-none",
+        "slither": "slither --solc-remaps @openzeppelin=node_modules/@openzeppelin ",
+        "test": "NODE_ENV=test truffle test --compile-none",
+        "dtest": "DOCKER_ID=`docker run --detach --publish 127.0.0.1:8545:8545 trufflesuite/ganache:latest -i 31 -a 15 --gasLimit=10000000 --hardfork istanbul --db` && NODE_ENV=test truffle test --compile-none || true && docker stop $DOCKER_ID",
+        "print-test-keypairs": "node ./scripts/print-test-keyparis.js",
+        "docgen": "solidoc ./ ./docs true",
+        "docgen:compile": "solidoc ./ ./docs",
+        "prettier": "prettier --write \"contracts/**/*.sol\" && prettier --write \"contracts/*.sol\"",
+        "verify": "truffle run verify",
+        "stdjsonin": "truffle run stdjsonin",
+        "print-admins:mainnet": "truffle exec scripts/print-all-contract-admins.js --network mainnet",
+        "print-admins:whimsy": "NODE_ENV=whimsy truffle exec scripts/print-all-contract-admins.js --network whimsy"
+    },
+    "version": "0.0.2"
+}

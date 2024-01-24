@@ -1,0 +1,92 @@
+# references
+#   https://git-scm.com/docs/gitignore
+#   https://github.com/github/gitignore
+
+# source version control related
+CVS/
+.svn/
+.hg
+
+# IDEs or tools related
+/.idea/
+/.vscode/
+.gradle/
+
+# directories for intermediate or final compiled artifacts
+/bin/
+/target/
+/output/
+/Debug/
+/Release/
+/x86/
+/x64/
+/obj/
+/package/
+/build/
+
+# dependencies
+node_modules/*
+pkg/
+
+# generated artifacts
+/reports/
+/_site/
+.apt_generated/
+.atp_generated_tests/
+.deps/
+
+# runtime outputs
+/run/
+/log/
+/logs/
+/test-output/
+*.log
+npm-debug.log
+
+# backups, caches, or temporary artifacts
+.~*
+._*
+*.bak
+.cache*
+.*.swp
+*.md.html
+Gemfile.lock
+.sass-cache
+__pycache__/
+.pytest_cache/
+packer_cache/
+/temp/
+
+# misc
+config.gypi
+.npmrc
+.jekyll-metadata
+.DS_Store
+.lock-wscript
+.wafpickle-N
+/*.tgz
+
+# env
+.prod.env
+.env.prod
+
+# build outputs of Remix-IDE for smart contracts - https://remix-ide.readthedocs.io/en/latest/contract_metadata.html
+contracts/**/artifacts/
+
+## don't ignore OpenZeppelin contracts
+#!/node_modules/@openzeppelin
+#/node_modules/@openzeppelin/*
+#!/node_modules/@openzeppelin/contracts-3
+#/node_modules/@openzeppelin/contracts-3/build
+#/node_modules/@openzeppelin/contracts-3/package.json
+#/node_modules/@openzeppelin/contracts-3/**/artifacts
+#!/node_modules/@openzeppelin/contracts-4
+#/node_modules/@openzeppelin/contracts-4/build
+#/node_modules/@openzeppelin/contracts-4/package.json
+#/node_modules/@openzeppelin/contracts-4/**/artifacts
+#/node_modules/@openzeppelin/contracts-4/**/*.adoc
+.env
+build/flattened
+.env.goerli
+
+.env.devnet
