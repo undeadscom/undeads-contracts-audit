@@ -54,9 +54,7 @@
     },
     "scripts": {
         "build": "truffle compile",
-        "migrate": "truffle migrate --network whimsy -f $FROM$ONLY --to $TO$ONLY --compile-none",
         "migrate:main": "NODE_ENV=prod truffle migrate --network mainnet -f $FROM$ONLY --to $TO$ONLY --compile-none",
-        "migrate:whimsy": "NODE_ENV=whimsy truffle migrate --network whimsy -f $FROM$ONLY --to $TO$ONLY --compile-none",
         "slither": "slither --solc-remaps @openzeppelin=node_modules/@openzeppelin ",
         "test": "NODE_ENV=test truffle test --compile-none",
         "dtest": "DOCKER_ID=`docker run --detach --publish 127.0.0.1:8545:8545 trufflesuite/ganache:latest -i 31 -a 15 --gasLimit=10000000 --hardfork istanbul --db` && NODE_ENV=test truffle test --compile-none || true && docker stop $DOCKER_ID",
@@ -69,5 +67,5 @@
         "print-admins:mainnet": "truffle exec scripts/print-all-contract-admins.js --network mainnet",
         "print-admins:whimsy": "NODE_ENV=whimsy truffle exec scripts/print-all-contract-admins.js --network whimsy"
     },
-    "version": "0.0.2"
+    "version": "0.0.3"
 }
