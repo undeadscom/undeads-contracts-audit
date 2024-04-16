@@ -88,9 +88,14 @@ contract("ManagementV2", (accounts) => {
             { from: admin1 }
         );
 
-        const confirmed = await this.management.confirmTransaction(
+        await this.management.confirmTransaction(
             parseEvents(submitted).Submitted.transactionId,
             { from: admin2 }
+        );
+
+        const confirmed = await this.management.confirmTransaction(
+            parseEvents(submitted).Submitted.transactionId,
+            { from: admin3 }
         );
 
         const adminRemovedEvent = parseEvents(confirmed).AdminRemoved;
@@ -109,9 +114,15 @@ contract("ManagementV2", (accounts) => {
             callData,
             { from: admin1 }
         );
-        const confirmed = await this.management.confirmTransaction(
+        
+        await this.management.confirmTransaction(
             parseEvents(submitted).Submitted.transactionId,
             { from: admin2 }
+        );
+
+        const confirmed = await this.management.confirmTransaction(
+            parseEvents(submitted).Submitted.transactionId,
+            { from: admin3 }
         );
 
         const events = parseEvents(confirmed);
@@ -124,7 +135,7 @@ contract("ManagementV2", (accounts) => {
         expect(await this.management.isAdmin(newAdmin)).to.be.ok;
     });
 
-    it('Should not remove all admins', async () => {
+    it('Should not remove admins less than required', async () => {
         // Remove admin4
         let callData = this.management.contract
             .methods["removeAdmin(address)"](admin4)
@@ -138,26 +149,15 @@ contract("ManagementV2", (accounts) => {
             parseEvents(submitted).Submitted.transactionId,
             { from: admin2 }
         );
+        await this.management.confirmTransaction(
+            parseEvents(submitted).Submitted.transactionId,
+            { from: admin4 }
+        );
         expect(await this.management.isAdmin(admin4)).to.be.not.ok;
 
-        // Remove admin2
+        // Try to remove admin2
         callData = this.management.contract
             .methods["removeAdmin(address)"](admin2)
-            .encodeABI();
-        submitted = await this.management.submitTransaction(
-            this.management.address, 
-            callData,
-            { from: admin1 }
-        );
-        confirmed = await this.management.confirmTransaction(
-            parseEvents(submitted).Submitted.transactionId,
-            { from: admin2 }
-        );
-        expect(await this.management.isAdmin(admin2)).to.be.not.ok;
-
-        // Try to remove admin1
-        callData = this.management.contract
-            .methods["removeAdmin(address)"](admin1)
             .encodeABI();
         await this.management.submitTransaction(
             this.management.address, 

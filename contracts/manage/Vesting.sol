@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/utils/structs/BitMaps.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "../utils/GuardExtension.sol";
 
 /*
@@ -18,6 +19,7 @@ import "../utils/GuardExtension.sol";
 */
 contract Vesting is GuardExtension, Pausable {
     using BitMaps for BitMaps.BitMap;
+    using SafeERC20 for IERC20;
 
     address private _token;
     mapping(uint256 => bytes32) private _roots;
@@ -190,10 +192,7 @@ contract Vesting is GuardExtension, Pausable {
 
         emit Claimed(client_, key_, intervalTimestamp_, amount_);
 
-        require(
-            IERC20(_token).transfer(client_, amount_),
-            "Vesting: transfer failed"
-        );
+        IERC20(_token).safeTransfer(client_, amount_);
     }
 
     /**

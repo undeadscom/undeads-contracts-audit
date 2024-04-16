@@ -26,7 +26,7 @@ contract ManagementV2 is IManagementV2 {
     uint256 private _required;
     uint256 private _transactionCount;
 
-    modifier onlyManagment() {
+    modifier onlyManagement() {
         if (msg.sender != address(this)) {
             revert ManagementRequired();
         }
@@ -76,7 +76,8 @@ contract ManagementV2 is IManagementV2 {
     }
 
     modifier notExpired(uint256 transactionId_) {
-        uint256 expiredAt = _transactions[transactionId_].createdAt + TRANSACTION_TTL;
+        uint256 expiredAt = _transactions[transactionId_].createdAt +
+            TRANSACTION_TTL;
         if (block.timestamp >= expiredAt) {
             revert TransactionExpired(transactionId_, expiredAt);
         }
@@ -94,8 +95,8 @@ contract ManagementV2 is IManagementV2 {
         if (
             adminCount_ > MAX_ADMIN_COUNT ||
             required_ > adminCount_ ||
-            required_ == 0 ||
-            adminCount_ == 0
+            adminCount_ < 2 ||
+            required_ < adminCount_ / 2 + 1
         ) {
             revert InvalidRequirements(adminCount_, required_);
         }
@@ -172,7 +173,8 @@ contract ManagementV2 is IManagementV2 {
         bool expired_
     ) external view override returns (uint256 count) {
         for (uint256 i; i < _transactionCount; ++i) {
-            bool isExpired = _transactions[i].createdAt + TRANSACTION_TTL < block.timestamp;
+            bool isExpired = _transactions[i].createdAt + TRANSACTION_TTL <
+                block.timestamp;
             bool isExecuted = _transactions[i].executed;
             if (
                 (expired_ && isExpired && !isExecuted) ||
@@ -234,7 +236,8 @@ contract ManagementV2 is IManagementV2 {
         uint256 count;
         uint256 i;
         for (i; i < _transactionCount; ++i) {
-            bool isExpired = _transactions[i].createdAt + TRANSACTION_TTL < block.timestamp;
+            bool isExpired = _transactions[i].createdAt + TRANSACTION_TTL <
+                block.timestamp;
             bool isExecuted = _transactions[i].executed;
             if (
                 (expired_ && isExpired && !isExecuted) ||
@@ -271,11 +274,12 @@ contract ManagementV2 is IManagementV2 {
     )
         external
         override
-        onlyManagment
+        onlyManagement
         adminDoesNotExist(admin_)
         notNull(admin_)
-        validRequirement(_admins.length + 1, _required)
+        validRequirement(_admins.length + 1, _required + 1)
     {
+        _required = _required + 1;
         _isAdmin[admin_] = true;
         _admins.push(admin_);
         emit AdminAdded(admin_);
@@ -287,19 +291,26 @@ contract ManagementV2 is IManagementV2 {
      */
     function removeAdmin(
         address admin_
-    ) external override onlyManagment adminExists(admin_) {
+    )
+        external
+        override
+        onlyManagement
+        adminExists(admin_)
+        validRequirement(_admins.length - 1, _required)
+    {
         _isAdmin[admin_] = false;
         uint256 adminLength = _admins.length;
         for (uint256 i; i < adminLength - 1; ++i) {
             if (_admins[i] == admin_) {
                 _admins[i] = _admins[adminLength - 1];
-                delete _admins[adminLength - 1];
+                _admins.pop();
                 break;
             }
         }
 
-        if (_required > _admins.length) {
-            _changeRequirement(_admins.length);
+        // To avoid the use of the veto
+        if (_required == _admins.length) {
+            _changeRequirement(_admins.length - 1);
         }
         emit AdminRemoved(admin_);
     }
@@ -315,7 +326,8 @@ contract ManagementV2 is IManagementV2 {
     )
         external
         override
-        onlyManagment
+        onlyManagement
+        notNull(newAdmin_)
         adminExists(admin_)
         adminDoesNotExist(newAdmin_)
     {
@@ -337,7 +349,7 @@ contract ManagementV2 is IManagementV2 {
      */
     function changeRequirement(
         uint256 required_
-    ) external override onlyManagment {
+    ) external override onlyManagement {
         _changeRequirement(required_);
     }
 
