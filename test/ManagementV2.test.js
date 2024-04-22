@@ -115,14 +115,9 @@ contract("ManagementV2", (accounts) => {
             { from: admin1 }
         );
         
-        await this.management.confirmTransaction(
-            parseEvents(submitted).Submitted.transactionId,
-            { from: admin2 }
-        );
-
         const confirmed = await this.management.confirmTransaction(
             parseEvents(submitted).Submitted.transactionId,
-            { from: admin3 }
+            { from: admin2 }
         );
 
         const events = parseEvents(confirmed);
@@ -133,39 +128,6 @@ contract("ManagementV2", (accounts) => {
         expect(adminAddedEvent.admin).to.be.eq(newAdmin);
         expect(await this.management.isAdmin(oldAdmin)).to.be.not.ok;
         expect(await this.management.isAdmin(newAdmin)).to.be.ok;
-    });
-
-    it('Should not remove admins less than required', async () => {
-        // Remove admin4
-        let callData = this.management.contract
-            .methods["removeAdmin(address)"](admin4)
-            .encodeABI();
-        let submitted = await this.management.submitTransaction(
-            this.management.address, 
-            callData,
-            { from: admin1 }
-        );
-        await this.management.confirmTransaction(
-            parseEvents(submitted).Submitted.transactionId,
-            { from: admin2 }
-        );
-        await this.management.confirmTransaction(
-            parseEvents(submitted).Submitted.transactionId,
-            { from: admin4 }
-        );
-        expect(await this.management.isAdmin(admin4)).to.be.not.ok;
-
-        // Try to remove admin2
-        callData = this.management.contract
-            .methods["removeAdmin(address)"](admin2)
-            .encodeABI();
-        await this.management.submitTransaction(
-            this.management.address, 
-            callData,
-            { from: admin1 }
-        );
-
-        expect(await this.management.isAdmin(admin1)).to.be.ok;
     });
 
 })

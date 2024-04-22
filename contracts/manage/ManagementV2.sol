@@ -300,7 +300,7 @@ contract ManagementV2 is IManagementV2 {
     {
         _isAdmin[admin_] = false;
         uint256 adminLength = _admins.length;
-        for (uint256 i; i < adminLength - 1; ++i) {
+        for (uint256 i; i < adminLength; ++i) {
             if (_admins[i] == admin_) {
                 _admins[i] = _admins[adminLength - 1];
                 _admins.pop();

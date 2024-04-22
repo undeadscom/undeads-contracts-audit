@@ -181,7 +181,7 @@
           {
             "contract": "GuardExtensionUpgradeable",
             "label": "_rightsContract",
-            "type": "t_contract(IRights)27677",
+            "type": "t_contract(IRights)27675",
             "src": "..\\project:\\contracts\\upgradeable\\utils\\GuardExtensionUpgradeable.sol:12"
           },
           {
@@ -309,7 +309,7 @@
           "t_mapping(t_address,t_mapping(t_uint256,t_uint256))": {
             "label": "mapping(address => mapping(uint256 => uint256))"
           },
-          "t_contract(IRights)27677": {
+          "t_contract(IRights)27675": {
             "label": "contract IRights"
           },
           "t_bool": {
@@ -340,13 +340,13 @@
           {
             "contract": "GuardExtensionUpgradeable",
             "label": "_rightsContract",
-            "type": "t_contract(IRights)27677",
+            "type": "t_contract(IRights)27675",
             "src": "..\\project:\\contracts\\upgradeable\\utils\\GuardExtensionUpgradeable.sol:12"
           },
           {
             "contract": "AggregationFunds",
             "label": "claimableContracts",
-            "type": "t_mapping(t_address,t_array(t_contract(IClaimableFunds)27553)dyn_storage)",
+            "type": "t_mapping(t_address,t_array(t_contract(IClaimableFunds)27551)dyn_storage)",
             "src": "..\\project:\\contracts\\manage\\AggregationFunds.sol:45"
           },
           {
@@ -381,16 +381,16 @@
           }
         ],
         "types": {
-          "t_mapping(t_address,t_array(t_contract(IClaimableFunds)27553)dyn_storage)": {
+          "t_mapping(t_address,t_array(t_contract(IClaimableFunds)27551)dyn_storage)": {
             "label": "mapping(address => contract IClaimableFunds[])"
           },
           "t_address": {
             "label": "address"
           },
-          "t_array(t_contract(IClaimableFunds)27553)dyn_storage": {
+          "t_array(t_contract(IClaimableFunds)27551)dyn_storage": {
             "label": "contract IClaimableFunds[]"
           },
-          "t_contract(IClaimableFunds)27553": {
+          "t_contract(IClaimableFunds)27551": {
             "label": "contract IClaimableFunds"
           },
           "t_contract(IERC20)5978": {
@@ -418,7 +418,7 @@
           "t_address_payable": {
             "label": "address payable"
           },
-          "t_contract(IRights)27677": {
+          "t_contract(IRights)27675": {
             "label": "contract IRights"
           },
           "t_uint8": {
@@ -452,7 +452,7 @@
           {
             "contract": "GuardExtensionUpgradeable",
             "label": "_rightsContract",
-            "type": "t_contract(IRights)27677",
+            "type": "t_contract(IRights)27675",
             "src": "..\\project:\\contracts\\upgradeable\\utils\\GuardExtensionUpgradeable.sol:12"
           },
           {
@@ -496,7 +496,7 @@
           "t_address": {
             "label": "address"
           },
-          "t_contract(IRights)27677": {
+          "t_contract(IRights)27675": {
             "label": "contract IRights"
           },
           "t_uint8": {
