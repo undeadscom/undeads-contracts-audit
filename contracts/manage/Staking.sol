@@ -89,7 +89,7 @@ contract Staking is IStaking, GuardExtension {
      * @param interval_ Time interval index 0-5 (see getMonthIntervals()).
      */
     function stake(uint64 stakeAmount_, uint8 interval_) public {
-        _stake(stakeAmount_, interval_, 100);
+        _stake(stakeAmount_, interval_, 100, 0);
     }
 
     /**
@@ -105,7 +105,7 @@ contract Staking is IStaking, GuardExtension {
     ) public {
         require(msg.sender == _zombies.ownerOf(zombieId_), NOT_ZOMBIE_OWNER);
         uint16 rank = _zombies.getRank(zombieId_);
-        _stake(stakeAmount_, interval_, _getBoostByRank(rank));
+        _stake(stakeAmount_, interval_, _getBoostByRank(rank), zombieId_);
     }
 
     /**
@@ -282,7 +282,8 @@ contract Staking is IStaking, GuardExtension {
     function _stake(
         uint64 stakeAmount_,
         uint8 interval_,
-        uint128 boostCoefficient_
+        uint128 boostCoefficient_,
+        uint256 zombieId_
     ) private {
         require(stakeAmount_ > 0, ZERO_AMOUNT);
         require(interval_ < 6, INVALID_INTERVAL);
@@ -307,7 +308,7 @@ contract Staking is IStaking, GuardExtension {
         uint256 unwrappedAmount = uint256(stakeAmount_) * 1e18;
         _udsToken.safeTransferFrom(msg.sender, address(this), unwrappedAmount);
 
-        emit StakeAdded(msg.sender, stakeId);
+        emit StakeAdded(msg.sender, stakeId, zombieId_, boostCoefficient_);
     }
 
     function _setMaxApr(uint32 maxAPR_) private {

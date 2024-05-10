@@ -40,6 +40,8 @@ contract("Staking", (accounts) => {
 
     const addedEvent = parseEvents(stakeTransaction).StakeAdded;
     expect(addedEvent.staker).to.be.eq(alice);
+    expect(addedEvent.zombieId).to.be.bignumber.eq('0');
+    expect(addedEvent.boostCoefficient).to.be.bignumber.eq('100');
 
     const stakingId = addedEvent.stakeId;
     const userStaking = await this.staking.getStake(stakingId);
@@ -73,6 +75,8 @@ contract("Staking", (accounts) => {
 
     const addedEvent = parseEvents(stakeTransaction).StakeAdded;
     expect(addedEvent.staker).to.be.eq(alice);
+    expect(addedEvent.zombieId).to.be.bignumber.eq(zombieId);
+    expect(addedEvent.boostCoefficient).to.be.bignumber.eq(this.stakingBoostCoefficients[0]);
 
     const stakingId = addedEvent.stakeId;
     const userStaking = await this.staking.getStake(stakingId);
