@@ -266,13 +266,13 @@ contract Staking is IStaking, GuardExtension {
     function _getBoostByRank(
         uint16 zombieRank_
     ) private view returns (uint128) {
-        if (zombieRank_ < 1150) {
+        if (zombieRank_ <= 1150) {
             return _boosterCoefficient[0];
-        } else if (zombieRank_ < 1270) {
+        } else if (zombieRank_ <= 1270) {
             return _boosterCoefficient[1];
-        } else if (zombieRank_ < 1390) {
+        } else if (zombieRank_ <= 1390) {
             return _boosterCoefficient[2];
-        } else if (zombieRank_ < 1490) {
+        } else if (zombieRank_ <= 1490) {
             return _boosterCoefficient[3];
         } else {
             return _boosterCoefficient[4];
