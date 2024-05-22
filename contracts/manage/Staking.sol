@@ -44,6 +44,7 @@ contract Staking is IStaking, GuardExtension {
         "Staking: Staking interval is invalid";
     string private constant INVALID_STAKING_ID =
         "Staking: Staking id is invalid";
+    string private constant INVALID_INPUT = "Staking: Input is invalid";
 
     constructor(
         address rights_,
@@ -168,7 +169,7 @@ contract Staking is IStaking, GuardExtension {
      */
     function rewardOf(uint128 stakeId_) public view returns (uint256) {
         Stake memory currentStake = _stakes[stakeId_];
-        require(currentStake.lockedUntil < block.timestamp, ALREADY_REWARDED);
+        require(currentStake.lockedUntil < block.timestamp, NOT_OVER);
         require(currentStake.amount > 0, NOT_EXISTS);
         return
             _calcReward(
@@ -320,6 +321,12 @@ contract Staking is IStaking, GuardExtension {
         uint128[6] memory intervalCoefficients_,
         uint128[5] memory boosterCoefficients_
     ) private {
+        for (uint256 i; i < 6; ++i) {
+            require(intervalCoefficients_[i] > 0, INVALID_INPUT);
+        }
+        for (uint256 i; i < 5; ++i) {
+            require(boosterCoefficients_[i] > 0, INVALID_INPUT);
+        }
         _intervalCoefficient = intervalCoefficients_;
         _boosterCoefficient = boosterCoefficients_;
         emit CoefficientsUpdated(intervalCoefficients_, boosterCoefficients_);

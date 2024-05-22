@@ -67,5 +67,5 @@
         "print-admins:mainnet": "truffle exec scripts/print-all-contract-admins.js --network mainnet",
         "print-admins:whimsy": "NODE_ENV=whimsy truffle exec scripts/print-all-contract-admins.js --network whimsy"
     },
-    "version": "0.0.7"
+    "version": "0.0.8"
 }
