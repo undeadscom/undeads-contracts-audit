@@ -125,6 +125,7 @@ contract Staking is IStaking, GuardExtension {
         uint256 totalAmount = _calcReward(
             currentStake.amount,
             currentStake.shares,
+            _totalShares,
             currentStake.interval
         ) + unwrappedStakeAmount;
 
@@ -175,6 +176,7 @@ contract Staking is IStaking, GuardExtension {
             _calcReward(
                 currentStake.amount,
                 currentStake.shares,
+                _totalShares,
                 currentStake.interval                
             );
     }
@@ -191,7 +193,7 @@ contract Staking is IStaking, GuardExtension {
         require(stakeAmount_ > 0, ZERO_AMOUNT);
         require(interval_ < 6, INVALID_INTERVAL);
         uint128 shares = _intervalCoefficient[interval_] * stakeAmount_ * 100;
-        return _calcReward(stakeAmount_, shares, interval_);
+        return _calcReward(stakeAmount_, shares, _totalShares + shares, interval_);
     }
 
     /**
@@ -211,7 +213,7 @@ contract Staking is IStaking, GuardExtension {
         uint128 shares = _boosterCoefficient[zombieLevel_] *
             _intervalCoefficient[interval_] *
             stakeAmount_;
-        return _calcReward(stakeAmount_, shares, interval_);
+        return _calcReward(stakeAmount_, shares, _totalShares + shares, interval_);
     }
 
     /**
@@ -335,11 +337,12 @@ contract Staking is IStaking, GuardExtension {
     function _calcReward(
         uint128 stakeAmount_,
         uint128 shares_,
+        uint128 totalShares_,
         uint8 interval_        
     ) private view returns (uint256) {
         uint256 rewardPool = _udsToken.balanceOf(address(this)) -
             (uint256(totalStakes) * 1e18);
-        uint256 rewards = rewardPool * shares_ / _totalShares;
+        uint256 rewards = rewardPool * shares_ / totalShares_;
         uint256 maxRewards = (_maxAPR * stakeAmount_ * 1e18 * _intervalsMonth[interval_]) /
             120000;
 
