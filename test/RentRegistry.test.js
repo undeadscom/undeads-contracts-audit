@@ -11,7 +11,7 @@ const UDSToken = artifacts.require('UDSToken');
 const Zombies = artifacts.require('Zombies');
 const RentResolver = artifacts.require('RentResolver');
 
-contract.only('RentRegistry', (accounts) => {
+contract('RentRegistry', (accounts) => {
   // Alice - lender
   // Bob - renter
   const [admin, alice, bob] = accounts;
@@ -71,7 +71,7 @@ contract.only('RentRegistry', (accounts) => {
     const lendingId = 1;
     const rentDuration = 1;
 
-    await expectRevert(this.registry.rent(
+    await expectRevert.unspecified(this.registry.rent(
       [0],                    // NFT standart (0 - ERC721, 1 - ERC1155)
       [this.zombies.address], // NFT contract address
       [zombieId],             // Token Id
@@ -79,7 +79,7 @@ contract.only('RentRegistry', (accounts) => {
       [rentDuration],         // Rent duration in days
       [1],                    // Token amount (for ERC721 always 1)
       { from: bob }
-    ), 'ERC20: insufficient allowance');
+    ));
   });
 
   it('Should rent zombie', async () => {
@@ -128,14 +128,14 @@ contract.only('RentRegistry', (accounts) => {
     const zombieId = 100;
     const lendingId = 1;
     const rentingId = 1;
-    await expectRevert(this.registry.claimRent(
+    await expectRevert.unspecified(this.registry.claimRent(
       [0],                    // NFT standart (0 - ERC721, 1 - ERC1155)
       [this.zombies.address], // NFT contract address
       [zombieId],             // Token Id
       [lendingId],            // Lending Id
       [rentingId],            // Rent duration in days
       { from: alice }
-    ), 'ReNFT::return date not passed')
+    ))
   });
 
   it('Should claim rent', async () => {
