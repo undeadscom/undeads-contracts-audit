@@ -22,7 +22,7 @@ contract RentResolver is IRentResolver, GuardExtension {
             revert InvalidInput();
         }
         for (uint i; i < pts_.length; ++i) {
-            _addresses[pts_[i]] = addresses_[i];
+            _setPaymentToken(pts_[i], addresses_[i]);
         }
      }
 
@@ -31,6 +31,10 @@ contract RentResolver is IRentResolver, GuardExtension {
     }
 
     function setPaymentToken(uint8 pt_, address v_) external override haveRights {
+        _setPaymentToken(pt_, v_);
+    }
+
+    function _setPaymentToken(uint8 pt_, address v_) private {
         if (pt_ == 0) {
             revert InvalidInput();
         }
@@ -38,5 +42,6 @@ contract RentResolver is IRentResolver, GuardExtension {
             revert PtAlreadySet();
         }
         _addresses[pt_] = v_;
+        emit PaymentTokenAdded(pt_, v_);
     }
 }
