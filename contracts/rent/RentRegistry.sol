@@ -29,6 +29,7 @@ error NothingToPay();
 error LenderRequired();
 error RenterRequired();
 error InvalidInput(bytes32 parameter);
+error SameValue();
 
 contract RentRegistry is
     IRentRegistry,
@@ -459,7 +460,7 @@ contract RentRegistry is
             else if (lending_.lendAmount == renting_.rentAmount) {
                 // return the assets to the lender
                 if (nftStandard_ == NFTStandard.E721) {
-                    IERC721(nftAddress_).transferFrom(
+                    IERC721(nftAddress_).safeTransferFrom(
                         address(this),
                         lending_.lenderAddress,
                         tokenId_
@@ -890,12 +891,16 @@ contract RentRegistry is
     function setBeneficiary(address newBeneficiary_) external haveRights {
         if (_beneficiary != newBeneficiary_) {
             _beneficiary = newBeneficiary_;
+        } else {
+            revert SameValue();
         }
     }
 
     function setPaused(bool newPaused_) external haveRights {
         if (_paused != newPaused_) {
             _paused = newPaused_;
+        } else {
+            revert SameValue();
         }
     }
 
@@ -906,6 +911,8 @@ contract RentRegistry is
         if (_rentFee[token_] != newRentFee_) {
             _rentFee[token_] = newRentFee_;
             emit RentFeeUpdated(token_, newRentFee_);
+        } else {
+            revert SameValue();
         }
     }
 
